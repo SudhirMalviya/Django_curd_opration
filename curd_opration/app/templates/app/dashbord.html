@@ -1,0 +1,136 @@
+{% extends "app/base.html" %}
+
+{% block container %}
+<div class="row col-10 position-relative" style="margin-top: 40px;">
+    <div class="col-2 shadow-sm">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                href="#list-home" role="tab" aria-controls="home">Profile</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                href="#list-messages" role="tab" aria-controls="messages">query</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+                href="#list-settings" role="tab" aria-controls="settings">Query Delete/Update</a>
+        </div>
+    </div>
+    <div class="col-8 shadow-sm">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in key %}
+                        <tr>
+                            <form class="row g-3">
+                                <th scope="row">
+                                    <div class="col-auto">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            id="staticEmail2" value="{{i.name}}" >
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="col-auto">
+                                        <input type="email" readonly class="form-control" id="inputPassword2"
+                                            value="{{i.email}}" >
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-auto">
+                                        <input type="text" readonly class="form-control" id="inputPassword2"
+                                            value="{{i.mobile}}" >
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-auto">
+                                        <input type="text" readonly class="form-control" id="inputPassword2"
+                                            value="{{i.password}}" >
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">Query</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in key %}
+                        <tr>
+                            <form class="row g-3" action="{% url 'query_view' i.email %}" method="post">
+                                {% csrf_token %}
+                                <th scope="row">
+                                    <div class="col-auto">
+                                        <input type="email" readonly class="form-control-plaintext"
+                                            id="staticEmail2" value="{{ i.email }}" >
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="col-auto">
+                                        <input type="text" name="query" class="form-control"  >
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+              <h1 class="text-center animate__animated animate__fadeInDown">All Query Data Update/Delete</h1>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Query</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for j in key1 %}
+                        <tr>
+                            <th scope="row">{{ j.id }}</th>
+                            <td>{{ j.qemail }}</td>
+                            <form method="post" action="{% url 'edit_query' pk=j.id %}">
+                                {% csrf_token %}
+                                <td>
+                                    <input type="text" name="queryname" value="{{ j.qname }}">
+                                </td>
+                                <td>
+                                    <button type="submit">Update</button>
+                                </td>                                
+                            </form>
+                            <td>
+                                <form action="{% url 'delete_view' pk=j.id %}" method="post" name="deleteform">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock container %}

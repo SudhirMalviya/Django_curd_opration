@@ -1,0 +1,46 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block container %}
+{{see}}
+<div class="row row-cols-1 row-cols-md-2 g-4" style="width:94%; margin:3%;" >
+  
+    <div class="col shadow"  data-aos="fade-right"
+    data-aos-offset="300"
+    data-aos-easing="ease-in-sine">
+        <div class="card " style="background-color:#fff; color:black;">
+            <img src="{% static 'images/curd.jpg' %}" class="card-img-top" alt="..." class="home-image">
+            <div class="card-body">
+                <h2 class="card-title">Django session-Based User Authentication</h2>
+                <p class="card-text">How to use sessions¶
+                    Django provides full support for anonymous sessions. The session framework lets you store and retrieve arbitrary data on a per-site-visitor basis. It stores data on the server side and abstracts the sending and receiving of cookies. 
+                    Cookies contain a session ID – not the data itself (unless you’re using the cookie based backend).</p>
+            </div>
+        </div>
+    </div>
+    <div class="col shadow-sm"
+    data-aos="fade-left"
+    data-aos-anchor="#example-anchor"
+    data-aos-offset="500"
+    data-aos-duration="500" style="border:1px solid black; background-color:#fff;border-radius:5px; padding:15px;">
+        <div class="card" style="background-color:##fff; color:#02343  border:1px solid black; width:100%;">
+            <h1 style="width:100% !important; height:200px;color:black !important;text-align:center !important; background:#fff!important;">Welcome {{ data | default:" Guest" }}</h1>
+            <div class="card-body">
+                <p class="card-text" >Welcome, dear guest, to our website!
+                     We are delighted to have you explore the virtual corridors of our online space.
+                      Whether you are here for information, entertainment, or to discover our products and
+                       services, we extend a warm greeting. Feel free to navigate through the various sections
+                        and discover the wealth of content we have meticulously curated for your enjoyment. 
+                        Our digital doors are wide open, and we hope your experience here is both enjoyable 
+                        and enriching. Thank you for being a part of our online community, and we look forward
+                         to providing you with a positive and engaging visit.</p>
+            </div>
+            <h4 style="background-color:#blue !important; color:##fff; text-align:center;">Thank you  so much appreciated your attendance at our demonstration django project.</h4>
+        </div>
+    </div>
+</div>
+
+
+{% endblock container %}
+
+

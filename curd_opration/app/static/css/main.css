@@ -1,0 +1,27 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+   
+}
+.navbar{
+    background-color:#0546fa!important;
+    
+}
+.container-fluid{
+    background-color: #0546fa !important;
+}
+.home-image{
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.text-custom-color{
+    color: #F0EDCC !important;
+    text-decoration: none;
+}
+
+.footer{
+    background-image: url(./static/images/svg.png) !important;
+}
