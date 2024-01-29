@@ -106,6 +106,24 @@ def edit_query(request, pk):
         return render(request, 'app/dashbord.html', {'key1': data1, 'key': data})
     return render(request, 'app/dashbord.html', {'key1': [obj]})
 
+
+
+
+
+
+
+
+def search(request):
+    query_instance = get_object_or_404(Query,pk=1)  
+    if request.method == 'POST':
+        search_form = request.POST.get('search')
+        if search_form:
+            data1 = Query.objects.filter(Q(qname=search_form))
+            data = Signup.objects.filter(Q(email=query_instance.qemail))
+            return render(request, 'app/dashbord.html', {'key1': data1, 'key': data})
+    return render(request, 'app/dashbord.html', {'key1': [query_instance]})
+
+
 # -----------------------------------------------------------------------------------------
 #---------------------CURD END ------------------------------------------------------------
 # -----------------------------------------------------------------------------------------
